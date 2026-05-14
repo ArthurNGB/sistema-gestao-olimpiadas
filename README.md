@@ -88,14 +88,14 @@ Arquivo PlantUML: [codigos/diagrama-de-implantacao.puml](codigos/diagrama-de-imp
 |   |-- diagrama-de-classes.png
 |   |-- diagrama-de-pacotes.png
 |   |-- diagrama-de-componentes.png
-|   `-- diagrama-de-implantacao.png
+|   |-- diagrama-de-implantacao.png
 |-- codigos/
 |   |-- diagrama-de-caso-de-uso.puml
 |   |-- diagrama-de-classes.puml
 |   |-- diagrama-de-pacotes.puml
 |   |-- diagrama-de-componentes.puml
-|   `-- diagrama-de-implantacao.puml
-
+|   |-- diagrama-de-implantacao.puml
+```
 ## Ferramenta Utilizada
 
 Os diagramas foram modelados utilizando PlantUML.
