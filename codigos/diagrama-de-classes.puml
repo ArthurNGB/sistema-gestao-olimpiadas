@@ -1,0 +1,105 @@
+@startuml
+title SGO - Diagrama de Classes
+
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 70
+skinparam ranksep 75
+top to bottom direction
+
+class Pais {
+  - id: int
+  - nome: String
+  - sigla: String
+  + obterTotalMedalhas(): int
+}
+
+class Atleta {
+  - id: int
+  - nome: String
+  - dataNascimento: Date
+  - documento: String
+  + inscrever(competicao: Competicao): Inscricao
+}
+
+class Modalidade {
+  - id: int
+  - nome: String
+  - categoria: String
+}
+
+class Local {
+  - id: int
+  - nome: String
+  - endereco: String
+  - capacidade: int
+  + estaDisponivel(inicio: DateTime, fim: DateTime): boolean
+}
+
+class Competicao {
+  - id: int
+  - data: Date
+  - horarioInicio: Time
+  - horarioFim: Time
+  - status: StatusCompeticao
+  + adicionarInscricao(inscricao: Inscricao): void
+  + alocarLocal(local: Local): void
+  + registrarResultado(resultado: Resultado): void
+}
+
+class Inscricao {
+  - id: int
+  - dataInscricao: DateTime
+  - status: StatusInscricao
+  + confirmar(): void
+  + cancelar(): void
+}
+
+class Resultado {
+  - id: int
+  - registradoEm: DateTime
+  + obterMedalhistas(): List<Medalha>
+}
+
+class Medalha {
+  - id: int
+  - tipo: TipoMedalha
+}
+
+enum TipoMedalha {
+  OURO
+  PRATA
+  BRONZE
+}
+
+enum StatusCompeticao {
+  PLANEJADA
+  EM_ANDAMENTO
+  FINALIZADA
+}
+
+enum StatusInscricao {
+  PENDENTE
+  CONFIRMADA
+  CANCELADA
+}
+
+Pais "1" -- "0..*" Atleta
+
+Modalidade "1" -- "0..*" Competicao
+Local "1" -- "0..*" Competicao
+
+Atleta "1" -- "0..*" Inscricao
+Inscricao "0..*" -- "1" Competicao
+Pais "1" -- "0..*" Inscricao
+
+Competicao "1" -- "0..1" Resultado
+Resultado "1" *-- "3" Medalha
+Medalha "1" -- "1" Atleta
+Medalha "1" -- "1" Pais
+
+Medalha --> TipoMedalha
+Competicao --> StatusCompeticao
+Inscricao --> StatusInscricao
+
+@enduml
