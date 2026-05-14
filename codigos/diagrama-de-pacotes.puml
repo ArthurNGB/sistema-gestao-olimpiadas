@@ -1,0 +1,25 @@
+@startuml
+title SGO - Diagrama de Pacotes
+
+top to bottom direction
+skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 70
+skinparam ranksep 70
+
+package "Interface\nTelas e navegacao" as Interface
+package "Aplicacao\nServicos e casos de uso" as Aplicacao
+package "Dominio\nEntidades e regras" as Dominio
+package "Infraestrutura\nRepositorios e persistencia" as Infra
+package "Relatorios\nQuadro de medalhas" as Relatorios
+database "Banco de Dados" as Banco
+
+Interface -down..> Aplicacao : usa
+Aplicacao -down..> Dominio : aplica regras
+Aplicacao -left..> Infra : persiste dados
+Aplicacao -right..> Relatorios : solicita relatorios
+Infra -right..> Dominio : mapeia entidades
+Relatorios -down..> Dominio : consulta medalhas
+Infra -down..> Banco : armazena
+
+@enduml

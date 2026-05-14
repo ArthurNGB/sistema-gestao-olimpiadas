@@ -1,0 +1,43 @@
+@startuml
+title SGO - Diagrama de Caso de Uso
+
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+skinparam nodesep 55
+skinparam ranksep 65
+
+actor "Usuario" as Usuario
+actor "Administrador" as Administrador
+actor "Atleta" as Atleta
+actor "Delegacao" as Delegacao
+actor "Arbitro" as Arbitro
+actor "Gestor do Evento" as Gestor
+
+rectangle "Sistema de Gestao das Olimpiadas" {
+  usecase "Cadastrar Competicao" as UC01
+  usecase "Consultar Competicoes" as UC02
+  usecase "Inscrever Atleta" as UC03
+  usecase "Validar Pais por Modalidade" as UC04
+  usecase "Alocar Local" as UC05
+  usecase "Verificar Conflito de Horario" as UC06
+  usecase "Registrar Resultados" as UC07
+  usecase "Gerar Relatorio de Medalhas" as UC08
+}
+
+Administrador --> UC01
+Administrador --> UC05
+Usuario --> UC02
+
+Atleta --> UC03
+
+Delegacao --> UC03
+
+Arbitro --> UC07
+
+Gestor --> UC08
+
+UC03 .> UC04 : <<include>>
+UC05 .> UC06 : <<include>>
+
+@enduml

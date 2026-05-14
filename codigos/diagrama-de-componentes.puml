@@ -1,0 +1,96 @@
+@startuml
+title SGO - Diagrama de Componentes
+
+top to bottom direction
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam linetype ortho
+skinparam defaultTextAlignment center
+skinparam nodesep 55
+skinparam ranksep 70
+
+skinparam rectangle {
+  BackgroundColor #FFFFFF
+  BorderColor #333333
+  FontColor #333333
+}
+
+skinparam component {
+  BackgroundColor #F8F8F8
+  BorderColor #333333
+  FontColor #333333
+}
+
+skinparam database {
+  BackgroundColor #F8F8F8
+  BorderColor #333333
+  FontColor #333333
+}
+
+skinparam interface {
+  BackgroundColor #FF8A4C
+  BorderColor #FF8A4C
+}
+
+rectangle "<&monitor>\nNAVEGADOR" as Navegador #F8F8F8
+rectangle "<&code>\nAPI SGO" as API #F8F8F8
+
+component "<<SERVICE>>\nCOMPETICOES" as Competicoes
+component "<<SERVICE>>\nINSCRICOES" as Inscricoes
+component "<<SERVICE>>\nALOCACAO" as Alocacao
+component "<<SERVICE>>\nRESULTADOS" as Resultados
+component "<<SERVICE>>\nRELATORIOS" as Relatorios
+
+rectangle "DADOS" as Dados #F5F9FF;line.dashed;line:FF8A4C {
+  database "BANCO DE DADOS SGO" as Banco
+}
+
+() "REST" as RestCompeticoes
+() "REST" as RestInscricoes
+() "REST" as RestAlocacao
+() "REST" as RestResultados
+() "REST" as RestRelatorios
+
+() "TCP/IP" as TcpCompeticoes
+() "TCP/IP" as TcpInscricoes
+() "TCP/IP" as TcpAlocacao
+() "TCP/IP" as TcpResultados
+() "TCP/IP" as TcpRelatorios
+
+Navegador <-[#333333]-> API : HTTPS
+
+API -[#FF8A4C]-> RestInscricoes
+RestInscricoes -[#FF8A4C]-> Inscricoes
+
+API -[#FF8A4C]-> RestCompeticoes
+RestCompeticoes -[#FF8A4C]-> Competicoes
+
+API -[#FF8A4C]-> RestAlocacao
+RestAlocacao -[#FF8A4C]-> Alocacao
+
+API -[#FF8A4C]-> RestResultados
+RestResultados -[#FF8A4C]-> Resultados
+
+API -[#FF8A4C]-> RestRelatorios
+RestRelatorios -[#FF8A4C]-> Relatorios
+
+Inscricoes -[#2E7D32]-> Competicoes : REST
+Alocacao -[#2E7D32]-> Competicoes : REST
+Resultados -[#2E7D32]-> Competicoes : REST
+
+Competicoes -[#FF8A4C]-> TcpCompeticoes
+TcpCompeticoes -[#FF8A4C]-> Banco
+
+Inscricoes -[#FF8A4C]-> TcpInscricoes
+TcpInscricoes -[#FF8A4C]-> Banco
+
+Alocacao -[#FF8A4C]-> TcpAlocacao
+TcpAlocacao -[#FF8A4C]-> Banco
+
+Resultados -[#FF8A4C]-> TcpResultados
+TcpResultados -[#FF8A4C]-> Banco
+
+Relatorios -[#FF8A4C]-> TcpRelatorios
+TcpRelatorios -[#FF8A4C]-> Banco
+
+@enduml

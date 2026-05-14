@@ -1,0 +1,40 @@
+@startuml
+title SGO - Diagrama de Implantacao
+
+left to right direction
+skinparam linetype polyline
+skinparam nodesep 75
+skinparam ranksep 85
+
+node "Dispositivo do Usuario" as Cliente {
+  artifact "Navegador Web" as Browser
+}
+
+node "Servidor Web" as WebServer {
+  artifact "Interface de Usuario\n(SPA/HTML/CSS/JS)" as UI
+}
+
+node "Servidor de Aplicacao" as AppServer {
+  artifact "API SGO" as API
+  artifact "Modulos de Negocio" as Modulos
+}
+
+database "Servidor de Banco de Dados" as DbServer {
+  artifact "Banco SGO" as Banco
+}
+
+node "Servidor de Relatorios" as ReportServer {
+  artifact "Gerador de Relatorios" as Gerador
+}
+
+cloud "Internet/Rede Institucional" as Rede
+
+Browser -right-> Rede : HTTPS
+Rede -right-> WebServer : requisicoes web
+WebServer -right-> AppServer : HTTPS/REST
+API -down-> Modulos
+AppServer -right-> DbServer : JDBC/SQL
+AppServer -down-> ReportServer : relatorios
+ReportServer -right-> DbServer : medalhas
+
+@enduml
