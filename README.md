@@ -1,8 +1,8 @@
-# Sistema de Gestao das Olimpiadas (SGO)
+# Sistema de Gestao das Olimpiadas
 
 ## Sobre o Projeto
 
-O Sistema de Gestao das Olimpiadas (SGO) e uma proposta de modelagem para um trabalho da materia Projeto de Software, lecionada pelo professor João Paulo Carneiro Aramuni. O sistema permite gerenciar competicoes, inscricoes de atletas, alocacao de locais, registro de resultados e emissao de relatorios de medalhas por pais.
+O Sistema de Gestao das Olimpiadas e uma proposta de modelagem para um trabalho da materia Projeto de Software, lecionada pelo professor João Paulo Carneiro Aramuni. O sistema permite gerenciar competicoes, inscricoes de atletas, alocacao de locais, registro de resultados e emissao de relatorios de medalhas por pais.
 
 Este repositorio contem apenas a modelagem UML do sistema. Nao ha implementacao de codigo-fonte da aplicacao.
 
